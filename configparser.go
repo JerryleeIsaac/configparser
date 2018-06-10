@@ -1,7 +1,12 @@
 package configparser
 
 import (
+	"errors"
 	"time"
+
+	"gitlab.com/Jerrylee/configparser/basic"
+	"gitlab.com/Jerrylee/configparser/json"
+	"gitlab.com/Jerrylee/configparser/toml"
 )
 
 // ConfigParser is an interface for parsing config files
@@ -33,4 +38,22 @@ type ConfigParser interface {
 	// Duration default returns the duration config for the key given. Returns
 	// default value supplied if config was not found.
 	DurationDefault(key string, def time.Duration) time.Duration
+}
+
+// NewConfigParser creates a config parser for a given config type
+func NewConfigParser(configType string) (ConfigParser, error) {
+	var configParser ConfigParser
+
+	switch configType {
+	case "json":
+		configParser = new(json.Parser)
+	case "toml":
+		configParser = new(toml.Parser)
+	case "basic":
+		configParser = new(basic.Parser)
+	default:
+		return nil, errors.New("config type is currently unsupported")
+	}
+
+	return configParser, nil
 }
