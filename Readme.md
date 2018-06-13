@@ -20,12 +20,8 @@ Supported Data types: string, numeric, structs, boolean, duration
 Format:
 ```
 {
-	"key1": "string value",
-	"key2": numericValue,
-	"key3": {
-		"key4": "object attribute 1",
-		"key5": "object attribute 2"
-	}
+	"key1": "object attribute 1",
+	"key2": "object attribute 2"
 }
 ```
 

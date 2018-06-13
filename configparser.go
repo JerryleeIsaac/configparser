@@ -9,6 +9,16 @@ import (
 	"gitlab.com/Jerrylee/configparser/toml"
 )
 
+// ConfigType represents the type of file config
+type ConfigType string
+
+// Config types
+var (
+	JSONConfig  ConfigType = "json"
+	BasicConfig ConfigType = "basic"
+	TOMLConfig  ConfigType = "toml"
+)
+
 // ConfigParser is an interface for parsing config files
 type ConfigParser interface {
 	// SetFile sets the file in which the configs are to be read.
@@ -41,15 +51,15 @@ type ConfigParser interface {
 }
 
 // NewConfigParser creates a config parser for a given config type
-func NewConfigParser(configType string) (ConfigParser, error) {
+func NewConfigParser(configType ConfigType) (ConfigParser, error) {
 	var configParser ConfigParser
 
 	switch configType {
-	case "json":
+	case JSONConfig:
 		configParser = new(json.Parser)
-	case "toml":
+	case TOMLConfig:
 		configParser = new(toml.Parser)
-	case "basic":
+	case BasicConfig:
 		configParser = new(basic.Parser)
 	default:
 		return nil, errors.New("config type is currently unsupported")
