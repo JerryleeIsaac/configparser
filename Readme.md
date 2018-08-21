@@ -24,14 +24,3 @@ Format:
 	"key2": "object attribute 2"
 }
 ```
-
-# TOML Config 
-
-Supported Data types: string, numeric,  boolean, duration
-
-Format
-```
-[ConfigGroup1]
-	Config1 = config1value
-	QuotedConfig2 = "quotedValue2"
-```
